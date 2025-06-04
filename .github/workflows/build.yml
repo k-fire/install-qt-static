@@ -102,13 +102,3 @@ jobs:
           print("Found Qt version:", match[1])
           with open(os.environ["GITHUB_ENV"], "a") as f:
             f.write("QT_VERSION=" + match[1])
-      - name: Shorthand tags
-        run: |
-          git config --global user.email "27856297+dependabot-preview[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git tag -d v$QT_VERSION || true
-          git tag v$QT_VERSION -m v$QT_VERSION
-          git push -f origin v$QT_VERSION
-          git tag -d v${QT_VERSION%.*} || true
-          git tag v${QT_VERSION%.*} -m v${QT_VERSION%.*}
-          git push -f origin v${QT_VERSION%.*}
